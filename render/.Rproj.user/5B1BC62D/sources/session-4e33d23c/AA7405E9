@@ -1,0 +1,26 @@
+{
+    "id": "AA7405E9",
+    "path": "C:/Users/0123456789/sblims-dev/KYJ/SBLIMS.2024/render/R/hello.R",
+    "project_path": "R/hello.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1716537035887.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "18,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1716166727,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1716166727,
+    "read_only": false,
+    "read_only_alternatives": []
+}

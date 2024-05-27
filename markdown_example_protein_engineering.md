@@ -1,22 +1,6 @@
 ## MPH Single Directly Mutation Round 2
 
-hi
-
-img test
-
-![Image](images/2024.05.27.11.25.56.png)
-
-
-![Image](images/2024.05.27.12.56.18.png)
-
-
 ### Objectiv
-
-
-![Image](images/2024.05.27.11.25.12.png)
-
-![Image](images/2024.05.27.12.56.27.png)
-
 
 -   Constructing MPH mutants with multiple mutations with biofoundry facility
 
@@ -60,16 +44,6 @@ img test
     -   T91S_F ACCTCTGTTAGCGGTTACCTGGTT
     -   M43I_R GTCACCCAGCAGAATACGGTAGTAAC
 -   Echo 사용시 각 프라이머/샘플의 전처리 및 상세 볼륨 필요
-
-#### 이부분 내가 수정 
-생공연 실험진행부분
-마크다운 캡쳐한 이미지 바로 복사 - 붙여넣기 가능
-지정한 커서에 editor.getCursorPosition(); 이미지 삽입가능
-
-![Image](images/2024.05.27.11.29.03.png)
-
-
-
 
 #### Equipment
 

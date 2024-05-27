@@ -1,0 +1,74 @@
+library(shiny)
+library(rmarkdown)
+library(shinyAce)
+library(shinyjs)  # shinyjs 라이브러리 로드
+
+ui <- fluidPage(
+  useShinyjs(),  # ShinyJS 초기화
+  titlePanel("Markdown Editor and Viewer"),
+  sidebarLayout(
+    sidebarPanel(width=3,
+                 fileInput('file', 'Choose Markdown or R Markdown file',
+                           accept = c(".md", ".Rmd")),
+                 downloadButton("saveBtn", "Save Changes"),
+                 numericInput("height", "Window Height", value = 400, min = 100, step = 10)
+    ),
+    mainPanel(width=9,
+              h3("Viewer: Rendering Page"),
+              fluidRow(style = "overflow-y: auto; border: 1.5px solid #ccc;", id="renderingDiv",
+                       htmlOutput("output")
+              ),
+              br(),
+              h3("Editor"),
+              fluidRow(style = "overflow-y: auto;", id="editorDiv",
+                       aceEditor("editor", mode="markdown", theme="github")
+              )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  textContent <- reactiveVal()
+
+  observeEvent(input$file, {
+    req(input$file)
+    filePath <- input$file$datapath
+    mdContent <- readLines(filePath, warn = FALSE)
+    textContent(mdContent)
+
+    updateAceEditor(session, "editor", value = paste(mdContent, collapse="\n"))
+
+    output$output <- renderUI({
+      HTML(markdown::markdownToHTML(text=paste(textContent(), collapse="\n"), fragment.only=TRUE))
+    })
+  })
+
+  observe({
+    input$editor
+    isolate({
+      if (!is.null(input$editor)) {
+        textContent(strsplit(input$editor, "\n")[[1]])
+      }
+    })
+  })
+
+  output$saveBtn <- downloadHandler(
+    filename = function() { paste0(Sys.Date(), "-modified.md") },
+    content = function(file) {
+      writeLines(textContent(), file)
+    }
+  )
+
+  updateHeight <- function(elementId, height) {
+    shinyjs::runjs(sprintf("$('%s').css('max-height', '%spx'); $('%s').css('height', '%spx');",
+                           elementId, height, elementId, height))
+  }
+
+  observe({
+    updateHeight('#renderingDiv', input$height)
+    updateHeight('#editorDiv', input$height)
+  })
+}
+
+# 애플리케이션 실행
+shinyApp(ui = ui, server = server)
